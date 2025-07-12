@@ -4,7 +4,12 @@ const FileExplorer = () => {
   return (
     <div>
       {data.map((ele) => {
-        return <div>{ele.name}</div>;
+        return (
+          <div>
+            {ele.name}
+            {ele.age}
+          </div>
+        );
       })}
     </div>
   );
