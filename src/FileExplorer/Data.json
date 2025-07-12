@@ -1,0 +1,17 @@
+
+[{
+	"name":"public",
+	"isFolder":true
+
+
+}
+,{
+	"name":"src",
+	"isFolder":true
+
+},{
+	"name":"package.json",
+	"isFolder":false
+
+}
+]
