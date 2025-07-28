@@ -8,6 +8,7 @@ import FileExplorer from "./FileExplorer/FileExplorer";
 import GridBox from "./GridLightGreen/GridBox";
 import Progressbar from "./ProgressBar/Main";
 import OTP from "./OTP_Input/Main";
+import TODO from "./TODO/Main";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/gridLight" element={<GridBox />} />
         <Route path="/progressBar" element={<Progressbar />} />
         <Route path="/otpInput" element={<OTP />} />
+        <Route path="/todo" element={<TODO />} />
 
         {/* <Route path="/file" element={<FileExplorer />} /> */}
       </Routes>
