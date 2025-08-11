@@ -9,6 +9,7 @@ import GridBox from "./GridLightGreen/GridBox";
 import Progressbar from "./ProgressBar/Main";
 import OTP from "./OTP_Input/Main";
 import TODO from "./TODO/Main";
+import StepperMain from "./Stepper/StepperMain";
 
 const App = () => {
   return (
@@ -23,8 +24,8 @@ const App = () => {
         <Route path="/progressBar" element={<Progressbar />} />
         <Route path="/otpInput" element={<OTP />} />
         <Route path="/todo" element={<TODO />} />
-
-        {/* <Route path="/file" element={<FileExplorer />} /> */}
+        <Route path="/stepper" element={<StepperMain />} />
+        <Route path="/file" element={<FileExplorer />} />
       </Routes>
     </BrowserRouter>
   );

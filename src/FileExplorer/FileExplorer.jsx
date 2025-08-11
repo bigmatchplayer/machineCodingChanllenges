@@ -24,33 +24,8 @@ const List = ({ list, setData }) => {
     };
 
     const array = updateChildren(list, id);
-    console.log("array from func", array);
     setData(array);
   };
-
-  // const openFolder = (e, id, list) => {
-  //   const updateChildren = (list, id) => {
-  //     const updateArray = list.map((ele, index) => {
-  //       if (ele.id == id) {
-  //         return {
-  //           ...ele,
-  //           open: !ele.open,
-  //         };
-  //       }
-
-  //       if (ele.open == true && ele.children.length > 0) {
-  //         return {
-  //           ...ele,
-  //           children: updateChildren(ele.children),
-  //         };
-  //       }
-  //     });
-  //     return updateArray;
-  //   };
-  //   const array = updateChildren(list, id);
-  //   console.log("aray from func", array);
-  //   setData(array);
-  // };
 
   return (
     <div>
@@ -66,13 +41,26 @@ const List = ({ list, setData }) => {
               {item.name}
             </span>
             {item.isFolder && (
-              <span
-                data-name={item.name}
-                onClick={(e) => openFolder(e, item.id, list)}
-                style={{ marginLeft: "3px ", cursor: "pointer" }}
-              >
-                +
-              </span>
+              <>
+                <span
+                  data-name={item.name}
+                  onClick={(e) => openFolder(e, item.id, list)}
+                  style={{ marginLeft: "3px ", cursor: "pointer" }}
+                >
+                  {item.open ? "-" : "+"}
+                </span>
+                <span
+                  style={{
+                    marginLeft: "10px",
+                    cursor: "pointer",
+                    fontSize: "10px",
+                    background: "red",
+                  }}
+                  onClick={() => handleAdd(item.id)}
+                >
+                  Add
+                </span>
+              </>
             )}
             {item.children && item.open == true && (
               <div style={{ marginLeft: "10px" }}>

@@ -1,19 +1,50 @@
 import React, { useEffect, useState } from "react";
 
 const Main = () => {
-  const [toDoList, setToDOList] = useState([]);
+  const [toDoList, setToDOList] = useState([
+    {
+      id: "1",
+      task: "newTask1",
+      completed: false,
+    },
+    {
+      id: "2",
+      task: "newTask2",
+      completed: false,
+    },
+    {
+      id: "3",
+      task: "newTas3",
+      completed: false,
+    },
+    {
+      id: "5",
+      task: "newTask4",
+      completed: false,
+    },
+    {
+      id: "32",
+      task: "newTask5",
+      completed: false,
+    },
+    {
+      id: "98",
+      task: "newTask6",
+      completed: false,
+    },
+  ]);
   const [newTask, setNewTask] = useState("");
   const [page, setPages] = useState([1, 2, 3]);
-  const [startIndex, setStartIndex] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
   const [totalData, setTotalData] = useState(0);
-  const limit = 2;
+  const [completed, setCompleted] = useState([]);
+  const limit = 5;
   const [rows, setRows] = useState(0);
   useEffect(() => {
     const total = toDoList.length;
     setTotalData(total);
-    setRows(Math.ceil(total / 2));
+    setRows(Math.ceil(total / limit));
   }, [toDoList]);
-  console.log("rows", rows);
 
   // const pagenatedRows=
 
@@ -41,7 +72,15 @@ const Main = () => {
     const modify = newArray.filter((ele) => ele.id != id);
     setToDOList(modify);
   };
+  const handleChecked = (e, id) => {
+    const newArray = [...completed, id];
+    setCompleted(newArray);
+  };
+  const handlePageChange = (index) => {
+    setStartIndex(index * limit);
+  };
 
+  console.log("startIndex", startIndex);
   return (
     <div>
       <div
@@ -64,8 +103,17 @@ const Main = () => {
             .fill("0")
             .map((ele, index) => {
               return (
-                <div>
-                  <p>{index}</p>
+                <div onClick={() => handlePageChange(index)}>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      padding: "4px",
+                      marginRight: "4px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {index + 1}
+                  </p>
                 </div>
               );
             })}
@@ -115,7 +163,7 @@ const Main = () => {
             padding: "10px",
           }}
         >
-          {toDoList.slice(startIndex, limit).map((ele, index) => {
+          {toDoList.slice(startIndex, startIndex + limit).map((ele, index) => {
             return (
               <>
                 <div
@@ -124,9 +172,24 @@ const Main = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     fontSize: "18px",
+                    marginBottom: "8px",
                   }}
                 >
-                  <span>{index + 1}.</span> <span>{ele.task}</span>{" "}
+                  <span>{index + 1}.</span>
+                  <input
+                    type="checkbox"
+                    checked={completed.includes(ele.id)}
+                    onChange={(e) => handleChecked(e, ele.id)}
+                  />
+                  <span
+                    style={
+                      completed.includes(ele.id)
+                        ? { textDecoration: "line-through" }
+                        : {}
+                    }
+                  >
+                    {ele.task}
+                  </span>{" "}
                   <button onClick={(e) => handleDelete(e, ele.id)}>
                     Delete
                   </button>
